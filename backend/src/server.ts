@@ -9,7 +9,7 @@ app.use(express.json({ limit: "2000000000b" }));
 
 app.use("/api/v1/user", userRouter);
 app.use("/api/v1/artist", artistRouter);
-app.use("api/v1/music", musicRouter);
+app.use("/api/v1/music", musicRouter);
 
 app.listen(8000, () => {
   console.log("Server started");
