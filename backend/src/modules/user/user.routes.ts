@@ -4,12 +4,12 @@ import getAllUser from "./controller/getAllUser";
 import addUser from "./controller/addUser";
 import updateUser from "./controller/updateUser";
 import deleteUser from "./controller/deleteUser";
-const user = express();
+const userRouter = express();
 
-user.get("/", getAllUser);
-user.get("/:id", getUser);
-user.post("/add", addUser);
-user.patch("/update/:id", updateUser);
-user.delete("/delete/:id", deleteUser);
+userRouter.get("/all", getAllUser);
+userRouter.get("/:id", getUser);
+userRouter.post("/add", addUser);
+userRouter.patch("/update/:id", updateUser);
+userRouter.delete("/delete/:id", deleteUser);
 
-export default user;
+export default userRouter;

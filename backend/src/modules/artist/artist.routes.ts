@@ -4,12 +4,12 @@ import getSingleArtist from "./controller/getSingleArtist";
 import addArtist from "./controller/addArtist";
 import updateArtist from "./controller/updateArtist";
 import deleteArtist from "./controller/deleteArtist";
-const artist = express();
+const artistRouter = express();
 
-artist.get("/", getAllArtist);
-artist.get("/:id", getSingleArtist);
-artist.post("/add", addArtist);
-artist.patch("/update/:id", updateArtist);
-artist.delete("/delete/:id", deleteArtist);
+artistRouter.get("/", getAllArtist);
+artistRouter.get("/:id", getSingleArtist);
+artistRouter.post("/add", addArtist);
+artistRouter.patch("/update/:id", updateArtist);
+artistRouter.delete("/delete/:id", deleteArtist);
 
-export default artist;
+export default artistRouter;
