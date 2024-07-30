@@ -64,5 +64,21 @@ export const UserSchema = z.object({
       message: "Address cannot be less than 3 character",
     }),
 });
+export const LoginSchema = z.object({
+  email: z
+    .string({ required_error: "Email is a required field" })
+    .email("Please enter valid email")
+    .refine((data: string) => data?.trim() !== "", {
+      message: "Email is a required fiel",
+    }),
+  password: z
+    .string({ required_error: "Password is required" })
+    .refine((data: string) => data?.trim() !== "", {
+      message: "Password is required",
+    })
+    .refine((data: string) => data.length >= 8 && data?.length <= 12, {
+      message: "Password should be 8-12 characters long",
+    }),
+});
 export const ArtistSchema = z.object({});
 export const musicSchema = z.object({});

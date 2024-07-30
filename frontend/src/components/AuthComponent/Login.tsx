@@ -1,6 +1,9 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FieldValues, useForm } from "react-hook-form";
-import { UserSchema } from "../../schema/Schema";
+import { MdErrorOutline } from "react-icons/md";
+import { Link, useNavigate } from "react-router-dom";
+import { AUTH, LOGIN, REGISTER } from "../../config/path";
+import { LoginSchema } from "../../schema/Schema";
 import Text from "../Atomic/Text";
 import {
   ButtonContainer,
@@ -11,9 +14,10 @@ import {
   ResetBtn,
   SubmitBtn,
 } from "./Style";
-import { MdErrorOutline } from "react-icons/md";
-import { Link } from "react-router-dom";
-import { AUTH, REGISTER } from "../../config/path";
+import usePostData from "../../hooks/usePostData";
+import { notification } from "antd";
+import { BsCheckCircleFill } from "react-icons/bs";
+import { BiSolidErrorCircle } from "react-icons/bi";
 
 const Login = () => {
   const {
@@ -21,9 +25,31 @@ const Login = () => {
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm({ resolver: zodResolver(UserSchema) });
+  } = useForm({ resolver: zodResolver(LoginSchema) });
+  const { isLoading, error, postData } = usePostData();
+  const navigate = useNavigate();
 
-  const handleFormSubmit = (data: FieldValues) => {
+  const handleFormSubmit = async (data: FieldValues) => {
+    const endPoint = "user/login";
+    const response = await postData(endPoint, data);
+    console.log(response);
+    if (response?.status === 200) {
+      notification.success({
+        message: "User Successfully added to the system",
+        placement: "top",
+        duration: 3,
+        icon: <BsCheckCircleFill style={{ color: "green" }} />,
+      });
+      reset();
+      navigate(`/${AUTH}/${LOGIN}`);
+    } else {
+      notification.error({
+        message: "Error adding the user to the system",
+        duration: 3,
+        placement: "top",
+        icon: <BiSolidErrorCircle style={{ color: "red" }} />,
+      });
+    }
     console.log(data);
   };
   const handleReset = () => {

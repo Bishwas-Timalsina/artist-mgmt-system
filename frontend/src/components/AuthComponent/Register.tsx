@@ -1,8 +1,12 @@
 import { zodResolver } from "@hookform/resolvers/zod";
+import { notification } from "antd";
 import { FieldValues, useForm } from "react-hook-form";
+import { BiSolidErrorCircle } from "react-icons/bi";
+import { BsCheckCircleFill } from "react-icons/bs";
 import { MdErrorOutline } from "react-icons/md";
 import { Link, useNavigate } from "react-router-dom";
 import { AUTH, LOGIN } from "../../config/path";
+import usePostData from "../../hooks/usePostData";
 import { UserSchema } from "../../schema/Schema";
 import Text from "../Atomic/Text";
 import {
@@ -15,10 +19,6 @@ import {
   ResetBtn,
   SubmitBtn,
 } from "./Style";
-import { DatePicker, notification } from "antd";
-import usePostData from "../../hooks/usePostData";
-import { BsCheckCircleFill } from "react-icons/bs";
-import { BiSolidErrorCircle } from "react-icons/bi";
 
 const Register = () => {
   const {
