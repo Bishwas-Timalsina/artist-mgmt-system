@@ -42,6 +42,7 @@ const Login = () => {
       });
       reset();
       navigate(`/${AUTH}/${LOGIN}`);
+      localStorage?.setItem('accessToken',response?.data?.accessToken)
     } else {
       notification.error({
         message: "Error adding the user to the system",

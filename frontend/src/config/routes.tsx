@@ -1,13 +1,13 @@
 import { Navigate, RouteObject } from "react-router-dom";
-import AuthLayout from "../Layout.tsx/AuthLayout";
 import Login from "../components/AuthComponent/Login";
-import AppLayout from "../Layout.tsx/AppLayout";
-import UserPage from "../pages/UserPage";
-import SongPage from "../pages/SongPage";
+import Register from "../components/AuthComponent/Register";
+import AuthLayout from "../Layout/AuthLayout";
+import ProtectedRoute from "../Layout/ProtectedRoute";
 import ArtistPage from "../pages/ArtistPage";
 import NotFoundPage from "../pages/NotFoundPage";
+import SongPage from "../pages/SongPage";
+import UserPage from "../pages/UserPage";
 import { APP, ARTIST, AUTH, LOGIN, REGISTER, SONG, USER } from "./path";
-import Register from "../components/AuthComponent/Register";
 
 export const AuthRoutes: RouteObject = {
   path: AUTH,
@@ -26,7 +26,7 @@ export const AuthRoutes: RouteObject = {
 
 export const AppRoutes: RouteObject = {
   path: APP,
-  element: <AppLayout />,
+  element: <ProtectedRoute />,
   children: [
     {
       path: USER,
