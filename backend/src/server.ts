@@ -3,7 +3,10 @@ import cors from "cors";
 import userRouter from "./modules/user/user.routes";
 import artistRouter from "./modules/artist/artist.routes";
 import musicRouter from "./modules/song/song.routes";
+import dotenv from "dotenv";
+
 const app = express();
+dotenv.config();
 app.use(cors());
 app.use(express.json({ limit: "2000000000b" }));
 

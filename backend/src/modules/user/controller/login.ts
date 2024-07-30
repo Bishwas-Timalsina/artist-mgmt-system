@@ -1,5 +1,6 @@
 import { pool } from "../../../database/db";
 import bcrypt from "bcrypt";
+import userLoginManager from "../../../managers/userLoginManager";
 const login = async (req: any, res: any) => {
   const { email, password } = req.body;
   try {
@@ -17,10 +18,16 @@ const login = async (req: any, res: any) => {
     if (!isMatch) {
       throw new Error("Incorrect Password");
     }
+    const accessToken = userLoginManager({
+      id: user?.id,
+      email: user?.email,
+      first_name: user?.first_name,
+      last_name: user?.last_name,
+    });
     res.status(200).json({
       status: "Success",
       message: "Login successful",
-      data: user,
+      accessToken: accessToken,
     });
   } catch (e: any) {
     res.status(400).json({
