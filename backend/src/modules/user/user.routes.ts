@@ -4,8 +4,10 @@ import getAllUser from "./controller/getAllUser";
 import addUser from "./controller/addUser";
 import updateUser from "./controller/updateUser";
 import deleteUser from "./controller/deleteUser";
+import login from "./controller/login";
 const userRouter = express();
 
+userRouter.post("/login", login);
 userRouter.get("/all", getAllUser);
 userRouter.get("/:id", getUser);
 userRouter.post("/add", addUser);

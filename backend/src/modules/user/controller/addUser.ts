@@ -7,6 +7,18 @@ const addUser = async (req: any, res: any) => {
   const hashedPassword = await bcrypt.hash(password, 12);
 
   try {
+    if (
+      !firstName ||
+      !lastName ||
+      !email ||
+      !password ||
+      !dob ||
+      !phone ||
+      !address ||
+      !gender
+    ) {
+      throw new Error("Please include all the fields");
+    }
     const insertQuery =
       'INSERT INTO "user" (first_name,last_name,email,password,dob,gender,phone,address) VALUES ($1,$2,$3,$4,$5,$6,$7,$8) RETURNING *';
     const newUser = await pool.query(insertQuery, [
