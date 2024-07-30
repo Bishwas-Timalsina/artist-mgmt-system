@@ -1,7 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FieldValues, useForm } from "react-hook-form";
 import { MdErrorOutline } from "react-icons/md";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AUTH, LOGIN } from "../../config/path";
 import { UserSchema } from "../../schema/Schema";
 import Text from "../Atomic/Text";
@@ -15,8 +15,10 @@ import {
   ResetBtn,
   SubmitBtn,
 } from "./Style";
-import { DatePicker } from "antd";
+import { DatePicker, notification } from "antd";
 import usePostData from "../../hooks/usePostData";
+import { BsCheckCircleFill } from "react-icons/bs";
+import { BiSolidErrorCircle } from "react-icons/bi";
 
 const Register = () => {
   const {
@@ -26,20 +28,36 @@ const Register = () => {
     formState: { errors },
   } = useForm({ resolver: zodResolver(UserSchema) });
 
+  const navigate = useNavigate();
   const { isLoading, error, postData } = usePostData();
 
   const handleFormSubmit = async (data: FieldValues) => {
-    const endPoint = "user/register";
+    const endPoint = "user/add";
     const response = await postData(endPoint, data);
     console.log(response);
+    if (response?.status === 200) {
+      notification.success({
+        message: "User Successfully added to the system",
+        placement: "top",
+        duration: 3,
+        icon: <BsCheckCircleFill style={{ color: "green" }} />,
+      });
+      reset();
+      navigate(`/${AUTH}/${LOGIN}`);
+    } else {
+      notification.error({
+        message: "Error adding the user to the system",
+        duration: 3,
+        placement: "top",
+        icon: <BiSolidErrorCircle style={{ color: "red" }} />,
+      });
+    }
+    console.log(data);
   };
   const handleReset = () => {
     reset();
   };
 
-  const handleDateChange = (date: any, dateString: any) => {
-    console.log(dateString);
-  };
   return (
     <>
       <div className="flex flex-col justify-center items-center w-[60%] rounded-md gap-8">
@@ -122,7 +140,7 @@ const Register = () => {
             <InputContainer>
               <InputLabel>Phone</InputLabel>
               <Input
-                {...register("phoneNumber")}
+                {...register("phone")}
                 type="text"
                 autoComplete="off"
                 placeholder="Enter your phone number"
@@ -158,10 +176,11 @@ const Register = () => {
             <InputContainer>
               <InputLabel>Gender</InputLabel>
               <InputSelect
-                {...register("status")}
+                {...register("gender")}
                 error={false}
                 defaultValue={""}
               >
+                <option value={""}>--- Select the Gender ---</option>
                 <option value={"m"}>Male</option>
                 <option value={"f"}>Female</option>
                 <option value={"o"}>Other</option>

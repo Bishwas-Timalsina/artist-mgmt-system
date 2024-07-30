@@ -31,7 +31,7 @@ export const UserSchema = z.object({
     .refine((data: string) => data.length >= 8 && data?.length <= 12, {
       message: "Password should be 8-12 characters long",
     }),
-  phoneNumber: z
+  phone: z
     .string({ required_error: "Phone number is required" })
     .refine((data: string) => data?.trim() !== "", {
       message: "Phone number is required field",
@@ -47,6 +47,14 @@ export const UserSchema = z.object({
     .refine((data) => /^\d{4}-\d{2}-\d{2}$/.test(data), {
       message: "Date of birth must be in YYYY-MM-DD format",
     }),
+  gender: z
+    .enum(["m", "f", "o"], {
+      message: "Please select the valid option",
+    })
+    .refine((data) => data !== null && data !== undefined, {
+      message: "Gender is required",
+    }),
+
   address: z
     .string({ required_error: "Address is required" })
     .refine((data: string) => data?.trim() !== "", {
