@@ -1,13 +1,13 @@
 import { Navigate, RouteObject } from "react-router-dom";
 import AuthLayout from "../Layout.tsx/AuthLayout";
 import Login from "../components/AuthComponent/Login";
-import { Register } from "../components/AuthComponent/Register";
 import AppLayout from "../Layout.tsx/AppLayout";
 import UserPage from "../pages/UserPage";
 import SongPage from "../pages/SongPage";
 import ArtistPage from "../pages/ArtistPage";
 import NotFoundPage from "../pages/NotFoundPage";
 import { APP, ARTIST, AUTH, LOGIN, REGISTER, SONG, USER } from "./path";
+import Register from "../components/AuthComponent/Register";
 
 export const AuthRoutes: RouteObject = {
   path: AUTH,
