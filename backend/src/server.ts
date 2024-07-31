@@ -4,12 +4,16 @@ import userRouter from "./modules/user/user.routes";
 import artistRouter from "./modules/artist/artist.routes";
 import musicRouter from "./modules/song/song.routes";
 import dotenv from "dotenv";
+import authRouter from "./modules/auth/auth.routes";
+import userAuth from "./middlewares/userAuth";
 
 const app = express();
 dotenv.config();
 app.use(cors());
 app.use(express.json({ limit: "2000000000b" }));
 
+app.use("/api/v1/auth", authRouter);
+app.use(userAuth);
 app.use("/api/v1/user", userRouter);
 app.use("/api/v1/artist", artistRouter);
 app.use("/api/v1/music", musicRouter);
