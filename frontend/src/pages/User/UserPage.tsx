@@ -6,31 +6,31 @@ import { DrawerContext } from "../../context/DrawerContext";
 import useFetchContent from "../../hooks/useFetchData";
 
 const UserPage = () => {
-  const [allProduct, setAllProduct] = useState<any>([]);
+  const [allUser, setAllUser] = useState<any>([]);
   const { isLoading, getData } = useFetchContent();
   const { drawerOpen, handleDrawer } = useContext(DrawerContext);
   const handleDrawerOpen = () => {
     handleDrawer();
   };
 
-  const fetchAllProduct = async () => {
+  const fetchAllUser = async () => {
     const endPoint = "user/all";
     const response = await getData(endPoint);
     if (response?.status === 200) {
-      setAllProduct(response?.data?.data);
+      setAllUser(response?.data?.data);
     }
   };
   useEffect(() => {
-    fetchAllProduct();
+    fetchAllUser();
   }, []);
   return (
     <>
       <div className="flex flex-col justify-start items-start gap-4 w-[100%]">
         <UserHeader handleDrawerOpen={handleDrawerOpen} />
         <UserTable
-          productData={allProduct}
+          userData={allUser}
           loading={isLoading}
-          fetchProduct={fetchAllProduct}
+          fetchUser={fetchAllUser}
           handleDrawerOpen={handleDrawerOpen}
         />
       </div>

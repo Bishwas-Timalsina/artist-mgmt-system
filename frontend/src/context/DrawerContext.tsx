@@ -2,30 +2,30 @@ import { createContext, useState } from "react";
 
 const defaultValue: any = {
   drawerOpen: false,
-  productId: null,
-  handleProductId: () => {},
+  userId: null,
+  handleUserId: () => {},
   handleDrawer: () => {},
 };
 
 export const DrawerContext = createContext<any>(defaultValue);
 
 export const DrawerContextProvider = ({ children }: any) => {
-  const [productId, setProductId] = useState<any>(null);
+  const [userId, setUserId] = useState<any>(null);
   const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
 
   const handleDrawer = () => {
     setDrawerOpen(!drawerOpen);
   };
-  const handleProductId = (productId: any) => {
-    setProductId(productId);
+  const handleUserId = (userId: any) => {
+    setUserId(userId);
   };
   return (
     <DrawerContext.Provider
       value={{
         drawerOpen,
-        productId,
+        userId,
         handleDrawer,
-        handleProductId,
+        handleUserId,
       }}
     >
       {children}

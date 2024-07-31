@@ -2,7 +2,7 @@ import { GoPlus } from "react-icons/go";
 import Text from "../../../components/Atomic/Text";
 import Button from "../../../components/Atomic/Button";
 
-const ProductHeader = (props: any) => {
+const UserHeader = (props: any) => {
   const { handleDrawerOpen } = props;
   const handleAddUser = () => {
     handleDrawerOpen();
@@ -29,4 +29,4 @@ const ProductHeader = (props: any) => {
   );
 };
 
-export default ProductHeader;
+export default UserHeader;

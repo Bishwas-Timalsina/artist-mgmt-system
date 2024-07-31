@@ -12,34 +12,34 @@ import useDeleteContent from "../../../hooks/useDeleteContent";
 import { useColumns } from "./useColumns";
 
 const UserTable = (props: any) => {
-  const { productData, loading, fetchProduct, handleDrawerOpen } = props;
+  const { userData, loading, fetchUser, handleDrawerOpen } = props;
 
   const [showModal, setShowModal] = useState<boolean>(false);
 
   const { deleteContent } = useDeleteContent();
-  const { handleProductId, productId } = useContext(DrawerContext);
+  const { handleUserId, userId } = useContext(DrawerContext);
   const onEdit = (id: string) => {
-    handleProductId(id);
+    handleUserId(id);
     handleDrawerOpen();
   };
   const onDelete = (id: string) => {
     setShowModal(true);
-    handleProductId(id);
+    handleUserId(id);
   };
-  const handleDeleteProduct = async () => {
-    const endPoint = `merchant/product/delete/${productId}`;
+  const handleDeleteUser = async () => {
+    const endPoint = `user/delete/${userId}`;
     const response = await deleteContent(endPoint);
     if (response?.status === 200) {
       notification.success({
-        message: "Product deleted Successfully",
+        message: "User deleted Successfully",
         duration: 3,
         icon: <BsCheckCircleFill style={{ color: "green" }} />,
       });
-      fetchProduct();
+      fetchUser();
       setShowModal(false);
     } else {
       notification.error({
-        message: "Error deleting the product",
+        message: "Error deleting the user",
         duration: 3,
         icon: <BiSolidErrorCircle style={{ color: "red" }} />,
       });
@@ -50,13 +50,12 @@ const UserTable = (props: any) => {
     <>
       <div className="w-[100%] h-[75vh]">
         <Table
-          dataSource={productData}
+          dataSource={userData}
           columns={column}
           pagination={false}
           scroll={{ y: 600 }}
           className="px-8"
           loading={loading}
-          
         />
       </div>
       <Modal
@@ -73,7 +72,7 @@ const UserTable = (props: any) => {
           <Text
             size="18px"
             weight="400"
-            content="Are you sure to delete the product"
+            content="Are you sure to delete the user?"
           />
           <div className="flex justify-center items-center gap-4">
             <Button
@@ -83,7 +82,7 @@ const UserTable = (props: any) => {
             />
             <Button
               label="Delete"
-              onclick={handleDeleteProduct}
+              onclick={handleDeleteUser}
               icon={<IoTrashBin className="text-[18px] text-white" />}
               style={{ background: "var(--accent-color)", borderRadius: "8px" }}
               className="rounded-lg"
