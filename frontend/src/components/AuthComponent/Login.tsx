@@ -2,7 +2,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { FieldValues, useForm } from "react-hook-form";
 import { MdErrorOutline } from "react-icons/md";
 import { Link, useNavigate } from "react-router-dom";
-import { AUTH, LOGIN, REGISTER } from "../../config/path";
+import { APP, AUTH, LOGIN, REGISTER, USER } from "../../config/path";
 import { LoginSchema } from "../../schema/Schema";
 import Text from "../Atomic/Text";
 import {
@@ -30,19 +30,19 @@ const Login = () => {
   const navigate = useNavigate();
 
   const handleFormSubmit = async (data: FieldValues) => {
-    const endPoint = "user/login";
+    const endPoint = "auth/login";
     const response = await postData(endPoint, data);
     console.log(response);
     if (response?.status === 200) {
       notification.success({
-        message: "User Successfully added to the system",
+        message: "Login Successful",
         placement: "top",
         duration: 3,
         icon: <BsCheckCircleFill style={{ color: "green" }} />,
       });
       reset();
-      navigate(`/${AUTH}/${LOGIN}`);
-      localStorage?.setItem('accessToken',response?.data?.accessToken)
+      navigate(`/${APP}/${USER}`);
+      localStorage?.setItem("accessToken", response?.data?.accessToken);
     } else {
       notification.error({
         message: "Error adding the user to the system",

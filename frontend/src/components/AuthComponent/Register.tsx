@@ -32,12 +32,12 @@ const Register = () => {
   const { isLoading, error, postData } = usePostData();
 
   const handleFormSubmit = async (data: FieldValues) => {
-    const endPoint = "user/add";
+    const endPoint = "auth/register";
     const response = await postData(endPoint, data);
     console.log(response);
     if (response?.status === 200) {
       notification.success({
-        message: "User Successfully added to the system",
+        message: "User registered successfully",
         placement: "top",
         duration: 3,
         icon: <BsCheckCircleFill style={{ color: "green" }} />,
