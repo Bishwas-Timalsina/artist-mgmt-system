@@ -3,10 +3,10 @@ import Login from "../components/AuthComponent/Login";
 import Register from "../components/AuthComponent/Register";
 import AuthLayout from "../Layout/AuthLayout";
 import ProtectedRoute from "../Layout/ProtectedRoute";
-import ArtistPage from "../pages/ArtistPage";
+import ArtistPage from "../pages/Artist/ArtistPage";
 import NotFoundPage from "../pages/NotFoundPage";
-import SongPage from "../pages/SongPage";
-import UserPage from "../pages/UserPage";
+import SongPage from "../pages/Song/SongPage";
+import UserPage from "../pages/User/UserPage";
 import { APP, ARTIST, AUTH, LOGIN, REGISTER, SONG, USER } from "./path";
 
 export const AuthRoutes: RouteObject = {
