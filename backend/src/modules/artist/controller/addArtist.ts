@@ -44,9 +44,5 @@ const addArtist = async (req: any, res: any) => {
       message: e.message,
     });
   }
-  res.status(200).json({
-    status: "success",
-    message: "This is add artist api",
-  });
 };
 export default addArtist;

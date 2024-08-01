@@ -34,7 +34,11 @@ const UserPage = () => {
           handleDrawerOpen={handleDrawerOpen}
         />
       </div>
-      <AddUserDrawer />
+      <AddUserDrawer
+        handleDrawerOpen = {handleDrawerOpen}
+        drawerOpen ={drawerOpen}
+        fetchUser  ={fetchAllUser}
+      />
     </>
   );
 };

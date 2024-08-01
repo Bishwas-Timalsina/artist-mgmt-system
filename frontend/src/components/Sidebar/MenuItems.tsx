@@ -15,9 +15,4 @@ export const MenuItems: IMenuItems[] = [
     key: ARTIST,
     icon: <FiMic />,
   },
-  {
-    label: "Song",
-    key: SONG,
-    icon: <IoIosMusicalNotes />,
-  },
 ];

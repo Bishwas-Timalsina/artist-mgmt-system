@@ -3,6 +3,7 @@ import { DrawerContext } from "../../context/DrawerContext";
 import useFetchContent from "../../hooks/useFetchData";
 import ArtistHeader from "./component/ArtistHeader";
 import ArtistTable from "./component/ArtistTable";
+import AddArtistDrawer from "./component/AddArtistDrawer";
 
 const ArtistPage = () => {
   const [allArtist, setAllArtist] = useState<any>([]);
@@ -33,7 +34,11 @@ const ArtistPage = () => {
           handleDrawerOpen={handleDrawerOpen}
         />
       </div>
-      {/* <AddArtistDrawer /> */}
+      <AddArtistDrawer
+      handleDrawerOpen = {handleDrawerOpen}
+      drawerOpen ={drawerOpen}
+      fetchArtist  ={fetchallArtist}
+      />
     </>
   );
 };

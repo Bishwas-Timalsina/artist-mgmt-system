@@ -1,8 +1,9 @@
 import { ColumnsType } from "antd/es/table";
 import { Link } from "react-router-dom";
 import Text from "../../../components/Atomic/Text";
-import { APP, USER } from "../../../config/path";
+import { APP, SONG, USER } from "../../../config/path";
 import MoreOptions from "../../../components/Atomic/MoreOptions";
+import { Tooltip } from "antd";
 
 export const displayGender = (gender: string) => {
   if (gender === "m") {
@@ -18,12 +19,14 @@ export const useColumns = (onEdit: any, onDelete: any) => {
     {
       title: <div>Name</div>,
       width: 150,
-      render: ({ name, _id }: any) => {
+      render: ({ name, id }: any) => {
         return (
           <>
-            <Link to={`/${APP}/${USER}`}>
-              <Text size="16px" weight="400" content={name} />
-            </Link>
+            <Tooltip title="View Songs" placement="topLeft">
+              <Link to={`/${APP}/${SONG}/${id}`}>
+                <Text size="16px" weight="400" content={name} />
+              </Link>
+            </Tooltip>
           </>
         );
       },

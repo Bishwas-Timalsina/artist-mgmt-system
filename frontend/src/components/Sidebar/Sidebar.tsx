@@ -7,9 +7,7 @@ const Sidebar = () => {
   const menuItems = MenuItems?.filter(
     (item: IMenuItems) => item?.label !== "Settings"
   );
-  const settingItems = MenuItems?.filter(
-    (item: IMenuItems) => item?.label === "Settings"
-  );
+
 
   return (
     <>

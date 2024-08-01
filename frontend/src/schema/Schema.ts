@@ -80,5 +80,47 @@ export const LoginSchema = z.object({
       message: "Password should be 8-12 characters long",
     }),
 });
-export const ArtistSchema = z.object({});
+export const ArtistSchema = z.object({
+  name: z
+    .string({ required_error: "Artist name is required" })
+    .refine((data: string) => data?.trim() !== "", {
+      message: "Artist name is required",
+    })
+    .refine((data: string) => data?.length >= 3, {
+      message: "Artist name cannot be less than 3 character",
+    }),
+  dob: z
+    .string({ required_error: "Date of birth is required" })
+    .refine((data) => data.trim() !== "", {
+      message: "Date of birth is a required field",
+    })
+    .refine((data) => /^\d{4}-\d{2}-\d{2}$/.test(data), {
+      message: "Date of birth must be in YYYY-MM-DD format",
+    }),
+  gender: z
+    .enum(["m", "f", "o"], {
+      message: "Please select the valid option",
+    })
+    .refine((data) => data !== null && data !== undefined, {
+      message: "Gender is required",
+    }),
+  address: z
+    .string({ required_error: "Address is required" })
+    .refine((data: string) => data?.trim() !== "", {
+      message: "Address is required",
+    })
+    .refine((data: string) => data?.length >= 3, {
+      message: "Address cannot be less than 3 character",
+    }),
+  no_of_album_released: z
+    .string({ required_error: "First release year is required" })
+    .refine((data) => /^\d+$/.test(data), {
+      message: "Number of albums released must contain only numeric values",
+    }),
+  first_release_year: z
+    .string({ required_error: "First release year is required" })
+    .refine((data) => data.trim() !== "", {
+      message: "First release year is a required field",
+    }),
+});
 export const musicSchema = z.object({});

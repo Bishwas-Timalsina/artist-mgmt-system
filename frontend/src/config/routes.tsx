@@ -37,7 +37,7 @@ export const AppRoutes: RouteObject = {
       element: <ArtistPage />,
     },
     {
-      path: SONG,
+      path: `${SONG}/:id`,
       element: <SongPage />,
     },
   ],
