@@ -34,7 +34,6 @@ const Register = () => {
   const handleFormSubmit = async (data: FieldValues) => {
     const endPoint = "auth/register";
     const response = await postData(endPoint, data);
-    console.log(response);
     if (response?.status === 200) {
       notification.success({
         message: "User registered successfully",
@@ -52,7 +51,6 @@ const Register = () => {
         icon: <BiSolidErrorCircle style={{ color: "red" }} />,
       });
     }
-    console.log(data);
   };
   const handleReset = () => {
     reset();

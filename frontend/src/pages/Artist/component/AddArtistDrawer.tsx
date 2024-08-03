@@ -30,7 +30,6 @@ const AddArtistDrawer = (props: any) => {
   const { isLoading, error, postData } = useAddContent();
 
   const handleFormSubmit = async (data: FieldValues) => {
-    console.log(data);
     const endPoint = "artist/add";
     const response = await postData(endPoint, data);
 

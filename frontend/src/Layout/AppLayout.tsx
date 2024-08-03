@@ -12,9 +12,9 @@ const AppLayout = () => {
     const endPoint = "user";
     const response: any = await fetchData(endPoint, accessToken);
     if (response?.status === 200) {
-      console.log(response?.data);
       const userInfo = [
         {
+          id: response?.data?.data?.id,
           email: response?.data?.data?.email,
           fullName:
             response?.data?.data?.first_name +

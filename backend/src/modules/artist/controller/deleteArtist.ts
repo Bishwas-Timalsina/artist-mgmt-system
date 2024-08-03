@@ -2,7 +2,6 @@ import { pool } from "../../../database/db";
 
 const deleteArtist = async (req: any, res: any) => {
   const artsitId = parseInt(req?.params.id);
-  console.log(artsitId);
 
   if (isNaN(artsitId)) {
     return res.status(400).json({

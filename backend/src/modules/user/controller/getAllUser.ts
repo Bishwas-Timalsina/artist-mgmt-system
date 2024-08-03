@@ -17,7 +17,6 @@ const getAllUser = async (req: any, res: any) => {
       status: "Error",
       message: "Sorry could not get the data",
     });
-    console.log("Error is", e);
   }
 };
 export default getAllUser;

@@ -2,13 +2,11 @@ import { pool } from "../../../database/db";
 
 const getUser = async (req: any, res: any) => {
   const { id } = req.params;
-  console.log(id);
-
   try {
     const singleUser = await pool.query('SELECT * FROM "user" WHERE id=$1', [
       id,
     ]);
-    console.log(singleUser.rows);
+
     if (singleUser?.rows?.length > 0) {
       res.status(200).json({
         status: "Success",

@@ -32,7 +32,6 @@ const Login = () => {
   const handleFormSubmit = async (data: FieldValues) => {
     const endPoint = "auth/login";
     const response = await postData(endPoint, data);
-    console.log(response);
     if (response?.status === 200) {
       notification.success({
         message: "Login Successful",
@@ -51,7 +50,6 @@ const Login = () => {
         icon: <BiSolidErrorCircle style={{ color: "red" }} />,
       });
     }
-    console.log(data);
   };
   const handleReset = () => {
     reset();
