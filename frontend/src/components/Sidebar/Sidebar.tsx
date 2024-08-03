@@ -2,13 +2,21 @@ import { Link } from "react-router-dom";
 import Text from "../Atomic/Text";
 import { MenuItems } from "./MenuItems";
 import { IMenuItems } from "../../Interface/Interface";
+import Button from "../Atomic/Button";
+import { CiLogout } from "react-icons/ci";
+import { Modal } from "antd";
+import { useState } from "react";
+import { IoTrashBin } from "react-icons/io5";
+import { useAuth } from "../../context/AuthContext";
 
 const Sidebar = () => {
-  const menuItems = MenuItems?.filter(
-    (item: IMenuItems) => item?.label !== "Settings"
-  );
+  const [showLogoutModal, setShowLogoutModal] = useState<boolean>(false);
+  const { logout } = useAuth();
 
-
+  const handleLogout = () => {
+    console.log("Logout");
+    logout();
+  };
   return (
     <>
       <div className="flex flex-col h-[100%] px-4 py-4 gap-4 shadow-xl">
@@ -17,7 +25,7 @@ const Sidebar = () => {
         </div>
         <div className="flex flex-col justify-between items-between h-[100%]">
           <div className="flex flex-col justify-start items-between gap-4 w-[100%] h-[100%] ">
-            {menuItems?.map((item: IMenuItems) => (
+            {MenuItems?.map((item: IMenuItems) => (
               <>
                 <Link
                   to={item?.key}
@@ -31,8 +39,47 @@ const Sidebar = () => {
               </>
             ))}
           </div>
+          <Button
+            label="Logout"
+            onclick={() => setShowLogoutModal(true)}
+            icon={<CiLogout className="text-[white] text-[22px] font-[600]" />}
+            style={{
+              background: "var(--accent-color)",
+              width: "100%",
+              borderRadius: "8px",
+              justifyContent: "between",
+            }}
+          />
         </div>
       </div>
+
+      <Modal
+        open={showLogoutModal}
+        destroyOnClose
+        centered
+        closable={true}
+        maskClosable={true}
+        footer={false}
+        closeIcon={false}
+        onCancel={() => setShowLogoutModal(false)}
+      >
+        <div className="flex flex-col justify-center items-center gap-8">
+          <Text size="18px" weight="600" content="Confirm Logout" />
+          <div className="flex justify-center items-center gap-4">
+            <Button
+              label="Cancel"
+              onclick={() => {}}
+              className="border-accent border-[1px] rounded-lg"
+            />
+            <Button
+              label="Confirm"
+              onclick={handleLogout}
+              style={{ background: "var(--accent-color)", borderRadius: "8px" }}
+              className="rounded-lg"
+            />
+          </div>
+        </div>
+      </Modal>
     </>
   );
 };

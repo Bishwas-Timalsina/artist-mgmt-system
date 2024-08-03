@@ -15,4 +15,5 @@ export const MenuItems: IMenuItems[] = [
     key: ARTIST,
     icon: <FiMic />,
   },
+  
 ];

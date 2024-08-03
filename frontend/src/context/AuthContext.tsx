@@ -3,7 +3,7 @@ import { createContext, useContext, useEffect, useMemo, useState } from "react";
 export const AuthContext = createContext<any>(undefined);
 
 export const AuthProvider = ({ children }: any) => {
-  const [accessToken, setAccessTokem] = useState<any>(
+  const [accessToken, setAccessToken] = useState<any>(
     localStorage?.getItem("accessToken")
   );
 
@@ -14,11 +14,15 @@ export const AuthProvider = ({ children }: any) => {
       localStorage?.removeItem("accessToken");
     }
   }, [accessToken]);
+  const logout = () => {
+    setAccessToken(null);
+  };
 
   const contextValue = useMemo(
     () => ({
       accessToken,
-      setAccessTokem,
+      setAccessToken,
+      logout
     }),
     [accessToken]
   );
