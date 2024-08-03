@@ -4,13 +4,25 @@ import UserTable from "./component/UserTable";
 import AddUserDrawer from "./component/AddUserDrawer";
 import { DrawerContext } from "../../context/DrawerContext";
 import useFetchContent from "../../hooks/useFetchData";
+import { Modal } from "antd";
+import Text from "../../components/Atomic/Text";
+import EditUserForm from "./component/EditUserForm";
 
 const UserPage = () => {
   const [allUser, setAllUser] = useState<any>([]);
   const { isLoading, getData } = useFetchContent();
   const { drawerOpen, handleDrawer } = useContext(DrawerContext);
+  const [modalOpen, setModalOpen] = useState<boolean>(false);
+  const [editUserData, setEditUserData] = useState<any>(null);
+
   const handleDrawerOpen = () => {
     handleDrawer();
+  };
+
+  const handleModalOpen = (userData: any) => {
+    console.log(userData);
+    setEditUserData(userData);
+    setModalOpen(true);
   };
 
   const fetchAllUser = async () => {
@@ -31,14 +43,31 @@ const UserPage = () => {
           userData={allUser}
           loading={isLoading}
           fetchUser={fetchAllUser}
-          handleDrawerOpen={handleDrawerOpen}
+          handleModalOpen={handleModalOpen}
         />
       </div>
       <AddUserDrawer
-        handleDrawerOpen = {handleDrawerOpen}
-        drawerOpen ={drawerOpen}
-        fetchUser  ={fetchAllUser}
+        handleDrawerOpen={handleDrawerOpen}
+        drawerOpen={drawerOpen}
+        fetchUser={fetchAllUser}
       />
+      <Modal
+        open={modalOpen}
+        destroyOnClose
+        centered
+        closable={true}
+        maskClosable={true}
+        footer={false}
+        closeIcon={false}
+        onCancel={() => setModalOpen(false)}
+      >
+        <div className="flex flex-col justify-center items-center gap-8">
+          <Text size="18px" weight="400" content="Edit the user detail" />
+          <div className="flex justify-center items-center gap-4">
+            <EditUserForm data={editUserData} />
+          </div>
+        </div>
+      </Modal>
     </>
   );
 };
