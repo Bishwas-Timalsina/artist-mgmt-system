@@ -25,8 +25,10 @@ const ArtistTable = (props: any) => {
   const onDelete = (id: string) => {
     setShowModal(true);
     handleUserId(id);
+    console.log(id);
   };
   const handleDeleteArtist = async () => {
+    console.log(userId);
     const endPoint = `artist/delete/${userId}`;
     const response = await deleteContent(endPoint);
     if (response?.status === 200) {

@@ -18,7 +18,7 @@ export const useColumns = (onEdit: any, onDelete: any) => {
     {
       title: <div>First name</div>,
       width: 150,
-      render: ({ first_name, _id }: any) => {
+      render: ({ first_name, id }: any) => {
         return (
           <>
             <Link to={`/${APP}/${USER}`}>
@@ -31,7 +31,7 @@ export const useColumns = (onEdit: any, onDelete: any) => {
     {
       title: <div>Last name</div>,
       width: 150,
-      render: ({ last_name, _id }: any) => {
+      render: ({ last_name, id }: any) => {
         return (
           <>
             <Link to={`/${APP}/${USER}`}>
@@ -103,7 +103,7 @@ export const useColumns = (onEdit: any, onDelete: any) => {
           <MoreOptions
             data={record}
             onEdit={onEdit}
-            onDelete={() => onDelete(record?._id)}
+            onDelete={() => onDelete(record?.id)}
           />
         );
       },

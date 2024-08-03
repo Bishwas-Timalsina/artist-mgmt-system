@@ -32,9 +32,9 @@ const MoreOptions = ({ data, onEdit, onDelete }: any) => {
 
   const menuClick = (e: any) => {
     if (e.key === "edit") {
-      onEdit(data?._id);
+      onEdit(data?.id);
     } else if (e.key === "delete") {
-      onDelete(data?._id);
+      onDelete(data?.id);
     }
   };
   const menuProps = {

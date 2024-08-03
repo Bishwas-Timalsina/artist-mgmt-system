@@ -25,25 +25,27 @@ const UserTable = (props: any) => {
   const onDelete = (id: string) => {
     setShowModal(true);
     handleUserId(id);
+    console.log(id)
   };
   const handleDeleteUser = async () => {
-    const endPoint = `user/delete/${userId}`;
-    const response = await deleteContent(endPoint);
-    if (response?.status === 200) {
-      notification.success({
-        message: "User deleted Successfully",
-        duration: 3,
-        icon: <BsCheckCircleFill style={{ color: "green" }} />,
-      });
-      fetchUser();
-      setShowModal(false);
-    } else {
-      notification.error({
-        message: "Error deleting the user",
-        duration: 3,
-        icon: <BiSolidErrorCircle style={{ color: "red" }} />,
-      });
-    }
+    console.log(userId);
+    // const endPoint = `user/delete/${userId}`;
+    // const response = await deleteContent(endPoint);
+    // if (response?.status === 200) {
+    //   notification.success({
+    //     message: "User deleted Successfully",
+    //     duration: 3,
+    //     icon: <BsCheckCircleFill style={{ color: "green" }} />,
+    //   });
+    //   fetchUser();
+    //   setShowModal(false);
+    // } else {
+    //   notification.error({
+    //     message: "Error deleting the user",
+    //     duration: 3,
+    //     icon: <BiSolidErrorCircle style={{ color: "red" }} />,
+    //   });
+    // }
   };
   const { column } = useColumns(onEdit, onDelete);
   return (

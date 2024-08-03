@@ -101,7 +101,7 @@ export const useColumns = (onEdit: any, onDelete: any) => {
           <MoreOptions
             data={record}
             onEdit={onEdit}
-            onDelete={() => onDelete(record?._id)}
+            onDelete={() => onDelete(record?.id)}
           />
         );
       },
