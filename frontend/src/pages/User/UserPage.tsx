@@ -20,7 +20,6 @@ const UserPage = () => {
   };
 
   const handleModalOpen = (userData: any) => {
-    console.log(userData);
     setEditUserData(userData);
     setModalOpen(true);
   };
@@ -64,7 +63,11 @@ const UserPage = () => {
         <div className="flex flex-col justify-center items-center gap-8">
           <Text size="18px" weight="400" content="Edit the user detail" />
           <div className="flex justify-center items-center gap-4">
-            <EditUserForm data={editUserData} />
+            <EditUserForm
+              data={editUserData}
+              fetchUser={fetchAllUser}
+              closeModal={setModalOpen}
+            />
           </div>
         </div>
       </Modal>

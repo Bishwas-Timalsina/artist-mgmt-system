@@ -68,6 +68,19 @@ export const useColumns = (onEdit: any, onDelete: any) => {
       },
     },
     {
+      title: <div>Phone</div>,
+      width: 150,
+      render: ({ phone }: any) => {
+        return (
+          <>
+            <div>
+              <Text size="16px" weight="400" content={phone} />
+            </div>
+          </>
+        );
+      },
+    },
+    {
       title: <div>Date of Birth (A.D)</div>,
       width: 150,
       render: ({ dob }: any) => {

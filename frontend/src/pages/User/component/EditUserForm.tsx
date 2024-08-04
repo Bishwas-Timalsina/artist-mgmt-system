@@ -20,7 +20,7 @@ import { BsCheckCircleFill } from "react-icons/bs";
 import { BiSolidErrorCircle } from "react-icons/bi";
 
 const EditUserForm = (props: any) => {
-  const { data } = props;
+  const { data, fetchUser, closeModal } = props;
   const userID = data?.[0]?.id;
 
   const {
@@ -44,7 +44,6 @@ const EditUserForm = (props: any) => {
   const { isLoading, updateData } = useUpdateContent();
   const handleFormSubmit = async (data: FieldValues) => {
     const endPoint = `user/update/${userID}`;
-    console.log(endPoint);
     const response = await updateData(endPoint, data);
 
     if (response?.status === 200) {
@@ -54,7 +53,8 @@ const EditUserForm = (props: any) => {
         icon: <BsCheckCircleFill style={{ color: "green" }} />,
       });
       reset();
-      // fetchUser();
+      fetchUser();
+      closeModal(false);
     } else {
       notification.error({
         message: "Error updating",
