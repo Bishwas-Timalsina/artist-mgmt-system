@@ -75,6 +75,19 @@ export const useColumns = (onEdit: any, onDelete: any) => {
       },
     },
     {
+      title: <div>Address</div>,
+      width: 150,
+      render: ({ address }: any) => {
+        return (
+          <>
+            <div>
+              <Text size="16px" weight="400" content={`${address}`} />
+            </div>
+          </>
+        );
+      },
+    },
+    {
       title: <div>No. of Album Released</div>,
       width: 150,
       render: ({ no_of_album_released }: any) => {
