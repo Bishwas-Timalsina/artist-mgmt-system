@@ -1,8 +1,12 @@
 import { pool } from "../../../database/db";
 
 const getSong = async (req: any, res: any) => {
+  const artistId = req?.headers?.artistid;
   try {
-    const allSong = await pool.query('SELECT * FROM "music"');
+    const allSong = await pool.query(
+      'SELECT * FROM "music" WHERE artist_id=$1',
+      [artistId]
+    );
     if (allSong?.rows?.length > 0) {
       res.status(200).json({
         status: "Success",

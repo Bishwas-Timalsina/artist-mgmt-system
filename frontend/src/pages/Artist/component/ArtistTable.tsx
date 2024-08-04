@@ -69,11 +69,19 @@ const ArtistTable = (props: any) => {
         onCancel={() => setShowModal(false)}
       >
         <div className="flex flex-col justify-center items-center gap-8">
-          <Text
-            size="18px"
-            weight="400"
-            content="Are you sure to delete the artist?"
-          />
+          <div className="flex flex-col justify-center items-center gap-1">
+            <Text
+              size="18px"
+              weight="400"
+              content="Are you sure to delete the artist?"
+            />
+            <Text
+              size="14px"
+              weight="400"
+              content="It will delete all associated musics."
+            />
+          </div>
+
           <div className="flex justify-center items-center gap-4">
             <Button
               label="Cancel"

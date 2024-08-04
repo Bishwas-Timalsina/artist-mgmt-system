@@ -7,13 +7,15 @@ const useFetchContent = () => {
   const [error, setError] = useState<any>(null);
 
   const accessToken = localStorage?.getItem("accessToken");
-  const getData = async (endPoint: any) => {
+  const getData = async (endPoint: any, id?: any) => {
     try {
       setIsLoading(true);
       const response = await axios.get(`${CONSTANTS.BASE_URL}/${endPoint}`, {
         headers: {
           Authorization: `Bearer ${accessToken}`,
+          artistId:id
         },
+        
       });
       setIsLoading(false);
       return response;
