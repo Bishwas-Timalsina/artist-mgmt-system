@@ -12,7 +12,7 @@ import useDeleteContent from "../../../hooks/useDeleteContent";
 import { useColumns } from "./useColumns";
 
 const ArtistTable = (props: any) => {
-  const { artistData, loading, fetchArtist, handleDrawerOpen } = props;
+  const { artistData, loading, fetchArtist, handleModalOpen } = props;
 
   const [showModal, setShowModal] = useState<boolean>(false);
 
@@ -20,7 +20,7 @@ const ArtistTable = (props: any) => {
   const { handleUserId, userId } = useContext(DrawerContext);
   const onEdit = (id: string) => {
     handleUserId(id);
-    handleDrawerOpen();
+    handleModalOpen(artistData);
   };
   const onDelete = (id: string) => {
     setShowModal(true);

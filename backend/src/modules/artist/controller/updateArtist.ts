@@ -7,7 +7,7 @@ const updateArtist = async (req: any, res: any) => {
     dob,
     address,
     gender,
-    first_released_year,
+    first_release_year,
     no_of_album_released,
   } = req?.body;
 
@@ -16,7 +16,7 @@ const updateArtist = async (req: any, res: any) => {
     !dob ||
     !address ||
     !gender ||
-    !first_released_year ||
+    !first_release_year ||
     !no_of_album_released
   ) {
     return res.status(400).json({
@@ -26,14 +26,15 @@ const updateArtist = async (req: any, res: any) => {
   }
   try {
     const updateQuery =
-      'UPDATE "artist" SET name=$1,dob=$2,address=$3,gender=$4,first_released_year=$5,no_of_album_released=$6 RETURNING *';
+      'UPDATE "artist" SET name=$1,dob=$2,address=$3,gender=$4,first_release_year=$5,no_of_album_released=$6 WHERE id=$7 RETURNING *';
     const result = await pool.query(updateQuery, [
       name,
       dob,
       address,
       gender,
-      first_released_year,
+      first_release_year,
       no_of_album_released,
+      id,
     ]);
 
     if (result?.rowCount === 0) {
