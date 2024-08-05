@@ -35,7 +35,8 @@ const SongOptions = ({ data, onEdit, onDelete }: any) => {
     if (e.key === "edit") {
       onEdit(data?.title);
     } else if (e.key === "delete") {
-      onDelete(data?.title);
+        console.log(data)
+      onDelete(data);
     }
   };
   const menuProps = {

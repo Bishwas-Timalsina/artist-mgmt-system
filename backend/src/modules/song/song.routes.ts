@@ -10,6 +10,6 @@ songRouter.get("/", getSong);
 songRouter.get("/:id", getSingleSong);
 songRouter.post("/add/:artist_id", addSong);
 songRouter.patch("/update/:artist_id/:song_title", updateSong);
-songRouter.delete("/delete", deleteSong);
+songRouter.delete("/delete/:artist_id/:song_title", deleteSong);
 
 export default songRouter;

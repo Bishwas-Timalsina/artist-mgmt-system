@@ -1,23 +1,50 @@
-import { Modal, Table } from "antd";
+import { Modal, notification, Table } from "antd";
 import React, { useState } from "react";
 import { useColumns } from "./useColumns";
 import Text from "../../../components/Atomic/Text";
 import Button from "../../../components/Atomic/Button";
 import { IoTrashBin } from "react-icons/io5";
+import useDeleteContent from "../../../hooks/useDeleteContent";
+import { BsCheckCircleFill } from "react-icons/bs";
+import { BiSolidErrorCircle } from "react-icons/bi";
 
 const SongTable = (props: any) => {
   const { songData, loading, fetchSong, handleModalOpen } = props;
 
   const [showModal, setShowModal] = useState<boolean>(false);
+  const [songToDelete, setSongToDelete] = useState<any>(null);
+  const { isLoading, deleteContent } = useDeleteContent();
 
   const onEdit = (title: string) => {
     console.log(title);
     const filteredSong = songData?.filter((song: any) => song?.title === title);
     handleModalOpen(filteredSong);
   };
-  const onDelete = (songName: string) => {
+  const onDelete = (data: any) => {
+    console.log(data);
     setShowModal(true);
-    // handleSongName(songName)
+    setSongToDelete(data);
+  };
+
+  const handleDeleteSong = async () => {
+    const endPoint = `song/delete/${songToDelete?.artist_id}/${songToDelete?.title}`;
+    const response = await deleteContent(endPoint);
+
+    if (response?.status === 200) {
+      notification.success({
+        message: "Song deleted Successfully",
+        duration: 3,
+        icon: <BsCheckCircleFill style={{ color: "green" }} />,
+      });
+      fetchSong();
+      setShowModal(false);
+    } else {
+      notification.error({
+        message: "Error deleting the song",
+        duration: 3,
+        icon: <BiSolidErrorCircle style={{ color: "red" }} />,
+      });
+    }
   };
   const { column } = useColumns(onEdit, onDelete);
   return (
@@ -54,8 +81,7 @@ const SongTable = (props: any) => {
             />
             <Button
               label="Delete"
-              // onclick={handleDeleteUser}
-              onclick={() => console.log("hello")}
+              onclick={handleDeleteSong}
               icon={<IoTrashBin className="text-[18px] text-white" />}
               style={{ background: "var(--accent-color)", borderRadius: "8px" }}
               className="rounded-lg"

@@ -57,7 +57,7 @@ export const useColumns = (onEdit: any, onDelete: any) => {
           <SongOptions
             data={record}
             onEdit={onEdit}
-            onDelete={() => onDelete(record?.id)}
+            onDelete={() => onDelete(record)}
           />
         );
       },
