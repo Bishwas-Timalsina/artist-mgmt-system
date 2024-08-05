@@ -9,7 +9,7 @@ const songRouter = express();
 songRouter.get("/", getSong);
 songRouter.get("/:id", getSingleSong);
 songRouter.post("/add/:artist_id", addSong);
-songRouter.patch("/update", updateSong);
+songRouter.patch("/update/:artist_id/:song_title", updateSong);
 songRouter.delete("/delete", deleteSong);
 
 export default songRouter;

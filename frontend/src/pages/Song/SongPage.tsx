@@ -6,6 +6,8 @@ import SongTable from "./component/SongTable";
 import AddSongDrawer from "./component/AddSongDrawer";
 import useFetchContent from "../../hooks/useFetchData";
 import { Modal } from "antd";
+import Text from "../../components/Atomic/Text";
+import EditSongForm from "./component/EditSongForm";
 
 const SongPage = () => {
   const { id } = useParams();
@@ -61,7 +63,16 @@ const SongPage = () => {
         closeIcon={false}
         onCancel={() => setModalOpen(false)}
       >
-        <p>Edit song modal</p>
+        <div className="flex flex-col justify-center items-center gap-8">
+          <Text size="18px" weight="400" content="Edit the song" />
+          <div className="flex justify-center items-center gap-4">
+            <EditSongForm
+              data={editSongData}
+              fetchSong={fetchAllSong}
+              closeModal={setModalOpen}
+            />
+          </div>
+        </div>
       </Modal>
     </>
   );

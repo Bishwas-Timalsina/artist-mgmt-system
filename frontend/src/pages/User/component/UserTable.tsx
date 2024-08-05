@@ -18,7 +18,8 @@ const UserTable = (props: any) => {
 
   const { deleteContent } = useDeleteContent();
   const { handleUserId, userId } = useContext(DrawerContext);
-  const onEdit = () => {
+  const onEdit = (id: string) => {
+    handleUserId(id);
     handleModalOpen(userData);
   };
   const onDelete = (id: string) => {
