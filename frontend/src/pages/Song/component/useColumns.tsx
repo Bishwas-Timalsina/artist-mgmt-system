@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import MoreOptions from "../../../components/Atomic/MoreOptions";
 import Text from "../../../components/Atomic/Text";
 import { ColumnsType } from "antd/es/table";
+import SongOptions from "./SongOptions";
 
 export const useColumns = (onEdit: any, onDelete: any) => {
   const column: ColumnsType<any> = [
@@ -53,7 +54,7 @@ export const useColumns = (onEdit: any, onDelete: any) => {
       key: "",
       render: (_, record) => {
         return (
-          <MoreOptions
+          <SongOptions
             data={record}
             onEdit={onEdit}
             onDelete={() => onDelete(record?.id)}

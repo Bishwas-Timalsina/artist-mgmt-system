@@ -10,8 +10,10 @@ const SongTable = (props: any) => {
 
   const [showModal, setShowModal] = useState<boolean>(false);
 
-  const onEdit = () => {
-    handleModalOpen(songData);
+  const onEdit = (title: string) => {
+    console.log(title);
+    const filteredSong = songData?.filter((song: any) => song?.title === title);
+    handleModalOpen(filteredSong);
   };
   const onDelete = (songName: string) => {
     setShowModal(true);
@@ -53,7 +55,7 @@ const SongTable = (props: any) => {
             <Button
               label="Delete"
               // onclick={handleDeleteUser}
-              onclick={()=>console.log('hello')}
+              onclick={() => console.log("hello")}
               icon={<IoTrashBin className="text-[18px] text-white" />}
               style={{ background: "var(--accent-color)", borderRadius: "8px" }}
               className="rounded-lg"

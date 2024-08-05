@@ -21,6 +21,7 @@ const ArtistPage = () => {
   };
 
   const handleModalOpen = (artistData: any) => {
+    console.log(artistData);
     setEditArtistData(artistData);
     setModalOpen(true);
   };

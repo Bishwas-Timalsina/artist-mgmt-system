@@ -20,7 +20,8 @@ const ArtistTable = (props: any) => {
   const { handleUserId, userId } = useContext(DrawerContext);
   const onEdit = (id: string) => {
     handleUserId(id);
-    handleModalOpen(artistData);
+    const artistToEdit = artistData?.filter((data: any) => data?.id === id);
+    handleModalOpen(artistToEdit);
   };
   const onDelete = (id: string) => {
     setShowModal(true);
