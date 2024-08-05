@@ -42,7 +42,6 @@ const EditArtistForm = (props: any) => {
   const { isLoading, updateData } = useUpdateContent();
 
   const handleFormSubmit = async (data: FieldValues) => {
-    console.log(data);
     const endPoint = `artist/update/${artistID}`;
     const response = await updateData(endPoint, data);
     if (response?.status === 200) {

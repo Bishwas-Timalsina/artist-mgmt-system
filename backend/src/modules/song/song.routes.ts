@@ -4,12 +4,12 @@ import getSong from "./controller/getSong";
 import getSingleSong from "./controller/getSingleSong";
 import updateSong from "./controller/updateSong";
 import deleteSong from "./controller/deleteSong";
-const musicRouter = express();
+const songRouter = express();
 
-musicRouter.get("/", getSong);
-musicRouter.get("/:id", getSingleSong);
-musicRouter.post("/add", addSong);
-musicRouter.patch("/update", updateSong);
-musicRouter.delete("/delete", deleteSong);
+songRouter.get("/", getSong);
+songRouter.get("/:id", getSingleSong);
+songRouter.post("/add/:artist_id", addSong);
+songRouter.patch("/update", updateSong);
+songRouter.delete("/delete", deleteSong);
 
-export default musicRouter;
+export default songRouter;

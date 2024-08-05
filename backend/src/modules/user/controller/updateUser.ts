@@ -18,7 +18,6 @@ const updateUser = async (req: any, res: any) => {
     });
   }
   try {
-    console.log(req?.body);
     const updateQuery =
       'UPDATE "user" SET first_name=$1,last_name=$2,email=$3,dob=$4,phone=$5,gender=$6,address=$7 WHERE id =$8 RETURNING *';
     const result = await pool.query(updateQuery, [

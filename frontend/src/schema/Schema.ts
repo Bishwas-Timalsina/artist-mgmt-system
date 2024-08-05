@@ -179,4 +179,22 @@ export const ArtistSchema = z.object({
       message: "First release year is a required field",
     }),
 });
-export const musicSchema = z.object({});
+export const songSchema = z.object({
+  title: z
+    .string({ required_error: "Song title is required" })
+    .refine((data) => data.trim() !== "", {
+      message: "Song title cannot be empty",
+    }),
+  album_name: z
+    .string({ required_error: "Album name is required" })
+    .refine((data) => data.trim() !== "", {
+      message: "Album name cannot be empty",
+    }),
+  genre: z
+    .enum(["rnb", "country", "classic", "rock", "jazz"], {
+      message: "Please select the valid option",
+    })
+    .refine((data) => data !== null && data !== undefined, {
+      message: "Song genre is required",
+    }),
+});
