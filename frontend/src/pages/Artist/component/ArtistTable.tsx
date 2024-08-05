@@ -18,6 +18,8 @@ const ArtistTable = (props: any) => {
 
   const { deleteContent } = useDeleteContent();
   const { handleUserId, userId } = useContext(DrawerContext);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [pageSize, setPageSize] = useState<number>(10);
   const onEdit = (id: string) => {
     handleUserId(id);
     const artistToEdit = artistData?.filter((data: any) => data?.id === id);
@@ -47,16 +49,25 @@ const ArtistTable = (props: any) => {
     }
   };
   const { column } = useColumns(onEdit, onDelete);
+  const handleTableChange = (pagination: any) => {
+    setCurrentPage(pagination.current);
+    setPageSize(pagination.pageSize);
+  };
   return (
     <>
       <div className="w-[100%] h-[75vh]">
         <Table
           dataSource={artistData}
           columns={column}
-          pagination={false}
           scroll={{ y: 600 }}
           className="px-8"
           loading={loading}
+          pagination={{
+            current: currentPage,
+            pageSize: pageSize,
+            total: artistData?.length || 0,
+            onChange: handleTableChange,
+          }}
         />
       </div>
       <Modal

@@ -41,6 +41,7 @@ const AddArtistDrawer = (props: any) => {
       });
       reset();
       fetchArtist();
+      handleDrawerOpen();
     } else {
       notification.error({
         message: "Error adding the atist",
@@ -49,6 +50,7 @@ const AddArtistDrawer = (props: any) => {
       });
     }
   };
+
   const handleReset = () => {
     reset();
   };

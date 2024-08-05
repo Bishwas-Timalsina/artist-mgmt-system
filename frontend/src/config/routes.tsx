@@ -44,7 +44,7 @@ export const AppRoutes: RouteObject = {
 };
 
 export const NotFoundRoutes: RouteObject = {
-  path: "",
+  path: "*",
   element: <NotFoundPage />,
 };
 

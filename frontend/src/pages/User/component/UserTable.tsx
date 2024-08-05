@@ -18,6 +18,9 @@ const UserTable = (props: any) => {
 
   const { deleteContent } = useDeleteContent();
   const { handleUserId, userId } = useContext(DrawerContext);
+
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [pageSize, setPageSize] = useState<number>(10);
   const onEdit = (id: string) => {
     handleUserId(id);
     const userToEdit = userData?.filter((data: any) => data?.id === id);
@@ -58,6 +61,11 @@ const UserTable = (props: any) => {
       });
     }
   };
+
+  const handleTableChange = (pagination: any) => {
+    setCurrentPage(pagination.current);
+    setPageSize(pagination.pageSize);
+  };
   const { column } = useColumns(onEdit, onDelete);
   return (
     <>
@@ -65,10 +73,15 @@ const UserTable = (props: any) => {
         <Table
           dataSource={userData}
           columns={column}
-          pagination={false}
           scroll={{ y: 600 }}
           className="px-8"
           loading={loading}
+          pagination={{
+            current: currentPage,
+            pageSize: pageSize,
+            total: userData?.length || 0,
+            onChange: handleTableChange,
+          }}
         />
       </div>
       <Modal

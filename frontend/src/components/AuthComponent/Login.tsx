@@ -1,8 +1,12 @@
 import { zodResolver } from "@hookform/resolvers/zod";
+import { notification } from "antd";
 import { FieldValues, useForm } from "react-hook-form";
+import { BiSolidErrorCircle } from "react-icons/bi";
+import { BsCheckCircleFill } from "react-icons/bs";
 import { MdErrorOutline } from "react-icons/md";
-import { Link, useNavigate } from "react-router-dom";
-import { APP, AUTH, LOGIN, REGISTER, USER } from "../../config/path";
+import { Link } from "react-router-dom";
+import { APP, AUTH, REGISTER, USER } from "../../config/path";
+import usePostData from "../../hooks/usePostData";
 import { LoginSchema } from "../../schema/Schema";
 import Text from "../Atomic/Text";
 import {
@@ -14,10 +18,6 @@ import {
   ResetBtn,
   SubmitBtn,
 } from "./Style";
-import usePostData from "../../hooks/usePostData";
-import { notification } from "antd";
-import { BsCheckCircleFill } from "react-icons/bs";
-import { BiSolidErrorCircle } from "react-icons/bi";
 
 const Login = () => {
   const {
@@ -27,7 +27,6 @@ const Login = () => {
     formState: { errors },
   } = useForm({ resolver: zodResolver(LoginSchema) });
   const { isLoading, error, postData } = usePostData();
-  const navigate = useNavigate();
 
   const handleFormSubmit = async (data: FieldValues) => {
     const endPoint = "auth/login";
@@ -39,9 +38,8 @@ const Login = () => {
         duration: 3,
         icon: <BsCheckCircleFill style={{ color: "green" }} />,
       });
-      reset();
-      navigate(`/${APP}/${USER}`);
       localStorage?.setItem("accessToken", response?.data?.accessToken);
+      window.location.href = `/${APP}/${USER}`;
     } else {
       notification.error({
         message: "Error adding the user to the system",
@@ -49,6 +47,7 @@ const Login = () => {
         placement: "top",
         icon: <BiSolidErrorCircle style={{ color: "red" }} />,
       });
+      return;
     }
   };
   const handleReset = () => {

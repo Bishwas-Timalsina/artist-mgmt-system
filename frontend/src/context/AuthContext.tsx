@@ -1,10 +1,26 @@
-import { createContext, useContext, useEffect, useMemo, useState } from "react";
+import {
+  createContext,
+  ReactNode,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 
-export const AuthContext = createContext<any>(undefined);
+interface AuthContextType {
+  accessToken: string | null;
+  setAccessToken: (token: string | null) => void;
+  logout: () => void;
+}
 
-export const AuthProvider = ({ children }: any) => {
+const AuthContext = createContext<AuthContextType | undefined>(undefined);
+
+interface AuthProviderProps {
+  children: ReactNode;
+}
+export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [accessToken, setAccessToken] = useState<any>(
-    localStorage?.getItem("accessToken")
+    localStorage?.getItem("accessToken") || null
   );
 
   useEffect(() => {
@@ -22,7 +38,7 @@ export const AuthProvider = ({ children }: any) => {
     () => ({
       accessToken,
       setAccessToken,
-      logout
+      logout,
     }),
     [accessToken]
   );
@@ -30,6 +46,10 @@ export const AuthProvider = ({ children }: any) => {
     <AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>
   );
 };
-export const useAuth = () => {
-  return useContext(AuthContext);
+export const useAuth = (): AuthContextType => {
+  const context = useContext(AuthContext);
+  if (context === undefined) {
+    throw new Error("useAuth must be used within an AuthProvider");
+  }
+  return context;
 };

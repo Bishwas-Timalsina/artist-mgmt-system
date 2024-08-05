@@ -14,6 +14,8 @@ const SongTable = (props: any) => {
   const [showModal, setShowModal] = useState<boolean>(false);
   const [songToDelete, setSongToDelete] = useState<any>(null);
   const { isLoading, deleteContent } = useDeleteContent();
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [pageSize, setPageSize] = useState<number>(10);
 
   const onEdit = (title: string) => {
     console.log(title);
@@ -47,15 +49,24 @@ const SongTable = (props: any) => {
     }
   };
   const { column } = useColumns(onEdit, onDelete);
+  const handleTableChange = (pagination: any) => {
+    setCurrentPage(pagination.current);
+    setPageSize(pagination.pageSize);
+  };
   return (
     <>
       <Table
         dataSource={songData}
         columns={column}
-        pagination={false}
         scroll={{ y: 600 }}
         className="px-8"
         loading={loading}
+        pagination={{
+          current: currentPage,
+          pageSize: pageSize,
+          total: songData?.length || 0,
+          onChange: handleTableChange,
+        }}
       />
       <Modal
         open={showModal}
